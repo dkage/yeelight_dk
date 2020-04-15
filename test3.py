@@ -1,5 +1,6 @@
 import socket
 import sys
+from urllib.parse import urlparse
 
 
 timeout = 2
@@ -18,9 +19,32 @@ except socket.timeout:
     print('error')
     sys.exit('error, no lamp found')
 
+# BULB dict creation after discover
+bulb = dict()
 
-print(lamp)
-# print(s.recvfrom(65507)[0].decode("utf-8"))
-#
-# for item in s.recvfrom(65507):
-#     print(item)
+# not assigning lamp values direct to bulb to later make changes for when more than 1 bulb in lan (currently only 1)
+bulb['ip'] = "0.0.0.0"
+bulb['port'] = "0000"
+bulb['properties'] = list()
+
+bulb['ip'] = lamp[1][0]
+bulb['port'] = lamp[1][1]
+
+lamp_properties_list = lamp[0].decode('utf-8').split('\r\n')
+
+
+current_lamp_properties = dict()
+for lamp_properties_item in lamp_properties_list:
+    properties = lamp_properties_item.split(':', 1)
+    if len(properties) == 2:
+        if properties[0] == 'support':
+            current_lamp_properties[properties[0]] = list(filter(None, properties[1].split(' ')))
+            continue
+        current_lamp_properties[properties[0]] = properties[1]
+    else:
+        # If key has no corresponding value, continue
+        continue
+
+bulb['properties'] = current_lamp_properties
+
+print(bulb)
