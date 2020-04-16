@@ -1,5 +1,6 @@
 import socket
 import sys
+import json
 from urllib.parse import urlparse
 
 
@@ -27,7 +28,7 @@ bulb['ip'] = "0.0.0.0"
 bulb['port'] = "0000"
 bulb['properties'] = list()
 
-bulb['ip'] = lamp[1][0]
+bulb['address'] = lamp[1][0], 55443
 bulb['port'] = lamp[1][1]
 
 lamp_properties_list = lamp[0].decode('utf-8').split('\r\n')
@@ -47,4 +48,13 @@ for lamp_properties_item in lamp_properties_list:
 
 bulb['properties'] = current_lamp_properties
 
-print(bulb)
+socket_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket_conn.connect(bulb['address'])
+
+# Yeelight documentation states that commands should be passed as JSON, following this structure
+# { "id": 1, "method": "set_power", "params":["on", "smooth", 500]}
+command = {"id": 1, "method": "set_power", "params": ["on", "smooth", 500]}
+command_json = (json.dumps(command) + '\r\n').encode('utf-8')
+
+socket_conn.send(command_json)
+
