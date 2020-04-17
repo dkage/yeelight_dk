@@ -53,8 +53,7 @@ socket_conn.connect(bulb['address'])
 
 # Yeelight documentation states that commands should be passed as JSON, following this structure
 # { "id": 1, "method": "set_power", "params":["on", "smooth", 500]}
-command = {"id": 1, "method": "set_power", "params": ["on", "smooth", 500]}
+command = {"id": 1, "method": "set_power", "params": ["on", "smooth", 3000]}
 command_json = (json.dumps(command) + '\r\n').encode('utf-8')
 
 socket_conn.send(command_json)
-
