@@ -36,7 +36,7 @@ def discover_lights(timeout=2):
         # Value 65535 = 65,535 bytes (8 byte header + 65,527 bytes of data) for a UDP datagram
         lamps_discovered = discover_socket.recvfrom(65507)
     except socket.timeout:
-        # TODO make better error handling here. Needs retrying.
+        # TODO make better error handling here. Needs retrying if light os off/disconnected.
         print('error')
         sys.exit('error, no lamp found')
 
