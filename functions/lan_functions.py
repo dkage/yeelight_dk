@@ -34,7 +34,7 @@ def discover_lights(timeout=2):
 
     try:
         # Value 65535 = 65,535 bytes (8 byte header + 65,527 bytes of data) for a UDP datagram
-        lamps_discovered = discover_socket.recvfrom(65507)
+        lamps_discovered = discover_socket.recvfrom(65535)
     except socket.timeout:
         # TODO make better error handling here. Needs retrying if light os off/disconnected.
         print('error')
@@ -43,7 +43,38 @@ def discover_lights(timeout=2):
     return lamps_discovered
 
 
-print(discover_lights())
+lamp = discover_lights()
+check_already_listed = list()
+
+# sys.exit()
+
+# BULB dict creation after discover
+bulb = dict()
+
+# not assigning lamp values direct to bulb to later make changes for when more than 1 bulb in lan (currently only 1)
+bulb['ip'] = "0.0.0.0"
+bulb['port'] = "0000"
+bulb['properties'] = list()
+
+bulb['ip'] = lamp[1][0]
+bulb['address'] = lamp[1][0], 55443
+bulb['port'] = lamp[1][1]
+
+lamp_properties_list = lamp[0].decode('utf-8').split('\r\n')
 
 
+current_lamp_properties = dict()
+for lamp_properties_item in lamp_properties_list:
+    properties = lamp_properties_item.split(':', 1)
+    if len(properties) == 2:
+        if properties[0] == 'support':
+            current_lamp_properties[properties[0]] = list(filter(None, properties[1].split(' ')))
+            continue
+        current_lamp_properties[properties[0]] = properties[1]
+    else:
+        # If key has no corresponding value, continue
+        continue
 
+bulb['properties'] = current_lamp_properties
+
+print(bulb)
