@@ -70,7 +70,7 @@ for lamp_properties_item in lamp_properties_list:
         if properties[0] == 'support':
             current_lamp_properties[properties[0]] = list(filter(None, properties[1].split(' ')))
             continue
-        current_lamp_properties[properties[0]] = properties[1]
+        current_lamp_properties[properties[0]] = properties[1].strip()
     else:
         # If key has no corresponding value, continue
         continue

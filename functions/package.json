@@ -1,15 +1,15 @@
 {
-  "ip": '192.168.1.191',
+  'ip': '192.168.1.191',
   'port': 49155,
   'properties': {
-    'Cache-Control': ' max-age=3600',
-    'Date': ' ',
-    'Ext': ' ',
-    'Location': ' yeelight://192.168.1.191:55443',
-    'Server': ' POSIX UPnP/1.0 YGLC/1',
-    'id': ' 0x00000000035e5a9e',
-    'model': ' color',
-    'fw_ver': ' 76',
+    'Cache-Control': 'max-age=3600',
+    'Date': '',
+    'Ext': '',
+    'Location': 'yeelight://192.168.1.191:55443',
+    'Server': 'POSIX UPnP/1.0 YGLC/1',
+    'id': '0x00000000035e5a9e',
+    'model': 'color',
+    'fw_ver': '76',
     'support': [
       'get_prop',
       'set_default',
@@ -32,14 +32,14 @@
       'set_music',
       'set_name'
     ],
-    'power': ' on',
-    'bright': ' 1',
-    'color_mode': ' 2',
-    'ct': ' 4000',
-    'rgb': ' 16711680',
-    'hue': ' 359',
-    'sat': ' 100',
-    'name': ' '
+    'power': 'on',
+    'bright': '1',
+    'color_mode': '2',
+    'ct': '4000',
+    'rgb': '16711680',
+    'hue': '359',
+    'sat': '100',
+    'name': ''
   },
   'address': (
   '192.168.1.191',
