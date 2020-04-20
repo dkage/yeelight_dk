@@ -60,6 +60,12 @@ bulb['ip'] = lamp[1][0]
 bulb['address'] = lamp[1][0], 55443
 bulb['port'] = lamp[1][1]
 
+
+print(type(lamp[0]))
+print(type(lamp[1]))
+
+sys.exit()
+
 lamp_properties_list = lamp[0].decode('utf-8').split('\r\n')
 
 
