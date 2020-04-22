@@ -1,6 +1,6 @@
-from .classes.LightBulb import LightBulb
+from interface.LightApp import LightApp
 
 
 # TODO add main functions
 if __name__ == "__main__":
-    print('start app')
+    LightApp().run()
