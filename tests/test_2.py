@@ -7,3 +7,5 @@ a = test()
 
 print('here')
 new_light.fill_data_from_discover(a)
+new_light.tcp_connect()
+new_light.send_command()

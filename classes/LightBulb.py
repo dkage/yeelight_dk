@@ -1,4 +1,5 @@
 import socket
+import json
 
 
 class LightBulb:
@@ -43,3 +44,19 @@ class LightBulb:
         for key, value in current_lamp_properties.items():
             if key in self.__dict__:
                 self.__dict__[key] = value
+
+    def tcp_connect(self):
+
+        self.socket_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_conn.connect(self.address)
+
+    def send_command(self, command=''):
+
+        # TODO remove this command hardcoded
+        # TODO create structure to list possible commands
+        command = {"id": 1, "method": "set_power", "params": ["off", "smooth", 3000]}  # Test
+
+        # Treat command to be sent as json in byte code
+        command_json = (json.dumps(command) + '\r\n').encode('utf-8')
+        self.socket_conn.send(command_json)
+
