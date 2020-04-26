@@ -1,34 +1,24 @@
 import kivy
+
 from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
+from kivy.config import Config
+from kivy.uix.widget import Widget
+from kivy.core.window import Window
+from kivy.uix.floatlayout import FloatLayout
 
 
-class ButtonDiscover(Button):
-    def __init__(self, **kwargs):
-        super(ButtonDiscover, self).__init__(**kwargs)
-        self.text = 'Submit'
-        self.on_press = self.clicked(self)
-
-    @staticmethod
-    def clicked(self):
-        print("Clicked!!!")
+# Window configuration, set size and disable resize
+Config.set('graphics', 'resizable', False)
+Config.set('graphics', 'width', '600')
+Config.set('graphics', 'height', '600')
+Config.write()
 
 
-class AppGrid(GridLayout):
-
-    def __init__(self, **kwargs):
-        super(AppGrid, self).__init__(**kwargs)
-
-        self.inside = GridLayout()
-        self.inside.cols = 2
-
-        button = ButtonDiscover()
-        self.inside.add_widget(button)
+class LightLay(FloatLayout):
+    pass
 
 
 class LightApp(App):
 
     def build(self):
-        return AppGrid()
+        return LightLay()
