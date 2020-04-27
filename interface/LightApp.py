@@ -15,10 +15,13 @@ Config.write()
 
 
 class LightLay(FloatLayout):
+
     pass
 
 
 class LightApp(App):
+    def test(self):
+        print('test')
 
     def build(self):
         return LightLay()

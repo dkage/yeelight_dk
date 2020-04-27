@@ -1,7 +1,8 @@
 <FloatLayout>
     Button:
+        size: 100, 100
         size_hint: .3, .2
-        text: 'Button test'
+        text: 'Test button'
         background_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        border: 10, 10, 10, 10
+        on_release: LightApp.test
